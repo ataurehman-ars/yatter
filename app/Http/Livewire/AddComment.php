@@ -13,6 +13,7 @@ use Illuminate\Http\Support\Facades\Event;
 
 use Crypt;
 use Auth;
+use Cache;
 
 use Illuminate\Encryption\Encrypter;
 
