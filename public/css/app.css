@@ -5711,6 +5711,14 @@ select {
   background-image: linear-gradient(to top left, var(--tw-gradient-stops));
 }
 
+.bg-hero-pattern {
+  background-image: url('/img/hero-pattern.svg');
+}
+
+.bg-footer-texture {
+  background-image: url('/img/footer-texture.png');
+}
+
 .from-transparent {
   --tw-gradient-from: transparent;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));
@@ -37681,6 +37689,14 @@ select {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
   }
 
+  .sm\:bg-hero-pattern {
+    background-image: url('/img/hero-pattern.svg');
+  }
+
+  .sm\:bg-footer-texture {
+    background-image: url('/img/footer-texture.png');
+  }
+
   .sm\:from-transparent {
     --tw-gradient-from: transparent;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));
@@ -69571,6 +69587,14 @@ select {
 
   .md\:bg-gradient-to-tl {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  }
+
+  .md\:bg-hero-pattern {
+    background-image: url('/img/hero-pattern.svg');
+  }
+
+  .md\:bg-footer-texture {
+    background-image: url('/img/footer-texture.png');
   }
 
   .md\:from-transparent {
@@ -101465,6 +101489,14 @@ select {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
   }
 
+  .lg\:bg-hero-pattern {
+    background-image: url('/img/hero-pattern.svg');
+  }
+
+  .lg\:bg-footer-texture {
+    background-image: url('/img/footer-texture.png');
+  }
+
   .lg\:from-transparent {
     --tw-gradient-from: transparent;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));
@@ -133357,6 +133389,14 @@ select {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
   }
 
+  .xl\:bg-hero-pattern {
+    background-image: url('/img/hero-pattern.svg');
+  }
+
+  .xl\:bg-footer-texture {
+    background-image: url('/img/footer-texture.png');
+  }
+
   .xl\:from-transparent {
     --tw-gradient-from: transparent;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));
@@ -165247,6 +165287,14 @@ select {
 
   .\32xl\:bg-gradient-to-tl {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  }
+
+  .\32xl\:bg-hero-pattern {
+    background-image: url('/img/hero-pattern.svg');
+  }
+
+  .\32xl\:bg-footer-texture {
+    background-image: url('/img/footer-texture.png');
   }
 
   .\32xl\:from-transparent {

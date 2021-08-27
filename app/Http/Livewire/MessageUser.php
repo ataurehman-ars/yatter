@@ -5,9 +5,12 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Crypt;
 use App\Events\NewMessage;
+use App\Events\FirstMessage;
 
 use DB;
 use Carbon\Carbon;
+use Cache;
+use Session;
 
 date_default_timezone_set('Asia/Karachi');
 
@@ -16,18 +19,22 @@ class MessageUser extends Component
     public $message;
     public $auth_id;
     public $receiver_id;
+    public $count_msgs;
+    public $first_msg;
 
     public function mount($auth_id, $receiver_id)
     {
         $this->message = '';
         $this->auth_id = $auth_id;
         $this->receiver_id = $receiver_id;
+        $this->first_msg = true;
     }
+
 
     public function getListeners()
     {
         return [
-           "decrypt-msg-{$this->receiver_id}" => "decryptMsg" , 
+           "echo-private:newmessageto.{$this->auth_id}.{$this->receiver_id},NewMessage" => 'decryptMsg' , 
         ];
     }
 
@@ -40,6 +47,7 @@ class MessageUser extends Component
     {
         $message = $this->message;
     }
+
 
     public function save_into_sender()
     {
@@ -81,7 +89,16 @@ class MessageUser extends Component
             if ($s && $r){
                 $this->emit('updateInterface', $this->message);
                 $this->reset('message');
-                broadcast(new NewMessage($this->receiver_id, $s))->toOthers();
+
+                if (!$this->first_msg){
+                    broadcast(new NewMessage($this->receiver_id, $this->auth_id , $s));
+                    return;
+                }
+
+                broadcast(new FirstMessage($this->receiver_id));
+                broadcast(new NewMessage($this->receiver_id, $this->auth_id , $s));
+                $this->first_msg = false;
+                return;
             }
             
         }
@@ -89,7 +106,7 @@ class MessageUser extends Component
 
     public function decryptMsg($msg)
     {
-        $decrypt = Crypt::decryptString($msg);
+        $decrypt = Crypt::decryptString($msg['message']);
 
         $this->emit('msg-encrypted-' . $this->receiver_id, $decrypt);
     }

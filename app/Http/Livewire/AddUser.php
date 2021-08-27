@@ -6,6 +6,8 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Auth;
+
 class AddUser extends Component
 {
     public $userId;
@@ -14,10 +16,10 @@ class AddUser extends Component
     public $connectText;
     public $cancelText;
 
-    public function mount($userId, $authId)
+    public function mount($userId)
     {
         $this->userId = $userId;
-        $this->authId = $authId;
+        $this->authId = Auth::id();
         $this->connectText = "Connect";
         $this->cancelText = "Cancel Request";
     }
@@ -30,11 +32,16 @@ class AddUser extends Component
     public function checkIfConnection()
     {
 
-        $if_conn = DB::table('connections')->where(function ($query) {
-            $query->where('user_id', '=', $this->authId)->where('connection_id', '=', $this->userId);
-        })
-        ->orWhere(function ($query) {
-            $query->where('user_id', '=', $this->userId)->where('connection_id', '=', $this->authId);
+        // $if_conn = DB::table('connections')->where(function ($query) {
+        //     $query->where('user_id', '=', $this->authId)->where('connection_id', '=', $this->userId);
+        // })
+        // ->orWhere(function ($query) {
+        //     $query->where('user_id', '=', $this->userId)->where('connection_id', '=', $this->authId);
+        // })
+        // ->first();
+
+        $if_conn = DB::table('connections_' . $this->authId)->where(function ($query) {
+            $query->where('connection_id', '=', $this->userId);
         })
         ->first();
         

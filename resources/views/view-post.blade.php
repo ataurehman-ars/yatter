@@ -1,62 +1,76 @@
 
-<x-app-layout>
-    <div class="m-4 grid">
-        <div class="flex">
-            
+    <x-main-header />
 
-            @foreach($post_contents as $content)
+            <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}">  
 
-            @php 
-                $photo_url = $content->profile_photo_path
-                ? 'uploads/' . $content->profile_photo_path
-                : 'uploads/profile-photos/user.png';
-            @endphp
+        <x-app-layout>
+            <div class="my-4 grid p-4">
+                <div class="flex">
+                    
 
-            <div>
-                <img class="h-10 w-10 rounded-full object-cover" src="{{ asset($photo_url) }}"/>
+                    @foreach($post_contents as $content)
+
+                    @php 
+                        $photo_url = $content->profile_photo_path
+                        ? 'uploads/' . $content->profile_photo_path
+                        : 'uploads/profile-photos/user.png';
+                    @endphp
+
+                    <div class="flex items-center">
+                        <div>
+                            <img class="h-10 w-10 rounded-full object-cover" src="{{ asset($photo_url) }}"/>
+                        </div>
+
+                        <div class="mx-2">
+                            <h2><p class="text-4xl font-semibold text-gray-700">{{ $content->username }}</p></h2>
+                            <small>{{ Carbon\Carbon::parse($content->created_at)->format("F j, Y, g:i a") }}</small>
+                        </div>
+                    </div>
+                </div>    
+
+                <div>
+                    <p class="my-2 semi-bold text-4xl non-italic">{{ $content->post }}</p>
+                </div>   
+
+                @if ($content->related_photo)
+                    <div>
+                        <img class="h-40 w-40 object-contain rounded" src="{{ 'uploads/post-images/' . $content->related_photo }}"/>
+                    </div>
+                @endif 
+
+                @if(Auth::id() == $content->id)
+                    @livewire('update-post' , ['post_id' => $post_id , 'post_content' => $content->post])
+                @endauth 
+
+                @livewire('add-comment' , ['postId' => $post_id , 'author_id' => $content->id])  
+
+                    @endforeach
+
+                    @livewire('get-comments' , ['postId' => $post_id])
+
+
             </div>
 
-            <div class="mx-2">
-                <h2><p class="font-thin text-sm">{{ $content->name }}</p></h2>
-                <p class="font-thin text-xs">{{ $content->created_at }}</p>
-            </div>
-        </div>    
+        </x-app-layout>
 
-        <div>
-            <p class="my-2 semi-bold text-2xl non-italic">{{ $content->post }}</p>
-        </div>   
+        <script>
 
-        @if ($content->related_photo)
-            <div>
-                <img class="h-10 w-10 rounded-full object-cover" src="{{ 'post-images/' . $content->related_photo }}"/>
-            </div>
-        @endif 
+            Livewire.on('postEdited', function() {
+                location.reload()
+            })
 
-        @if(Auth::id() == $content->id)
-            @livewire('update-post' , ['post_id' => $post_id , 'post_content' => $content->post])
-        @endauth 
+            Livewire.on('postDeleted', function() {
+                location.href = "{{ route('posts') }}"
+            })
 
-        @livewire('add-comment' , ['authId' => Auth::id() , 'postId' => $post_id])  
+        </script>
 
-            @endforeach
-
-            @livewire('get-comments' , ['postId' => $post_id])
+        <x-aside />
 
 
-    </div>
+    <x-main-footer />
 
-</x-app-layout>
+        
 
-<script>
-
-    Livewire.on('postEdited', function() {
-        location.reload()
-    })
-
-    Livewire.on('postDeleted', function() {
-        location.href = "{{ route('posts') }}"
-    })
-
-</script>
 
 

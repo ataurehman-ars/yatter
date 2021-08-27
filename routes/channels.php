@@ -32,7 +32,11 @@ Broadcast::channel('connectionoffline.{authId}', function () {
     return Auth::check();
 });
 
-Broadcast::channel('newmessageto.{receiver_id}', function ($receiver_id) {
+Broadcast::channel('newmessageto.{receiver_id}.{sender_id}', function ($receiver_id) {
+    return Auth::check();
+});
+
+Broadcast::channel('firstmessageto.{receiver_id}', function ($receiver_id) {
     return Auth::check();
 });
 
@@ -52,5 +56,7 @@ Broadcast::channel('seen-{sender_id}.{receiver_id}', function () {
     return Auth::check();
 });
 
-
+Broadcast::channel('chatdeleted-{sender_id}.{receiver_id}', function () {
+    return Auth::check();
+});
 

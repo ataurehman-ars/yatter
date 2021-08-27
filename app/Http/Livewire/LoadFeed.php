@@ -26,10 +26,14 @@ class LoadFeed extends Component
             $join->on('posts.author_id' , '=' , 'users.id');
         })
         ->select('users.id', 'users.username' , 'users.profile_photo_path' , 
-        'posts.post_id' , 'posts.post', 'posts.created_at')
+        'posts.post_id' , 'posts.post', 'posts.created_at', 'posts.related_photo')
         ->orderBy('posts.created_at' , 'desc')
         ->offset('0')
         ->limit('20')
         ->get();
     }
 }
+
+
+
+

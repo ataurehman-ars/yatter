@@ -10,31 +10,33 @@
                     <div class="flex">
 
                         @php 
-                            $photo_url = $info->profile_photo_path
-                            ? 'uploads/' . $info->profile_photo_path
+                            $photo_url = $info->connection_photo_url 
+                            ? 'uploads/' . $info->connection_photo_url 
                             : 'uploads/profile-photos/user.png';
                         @endphp
 
                         
                         <x-jet-dropdown-link 
-                            href="{{ route('messages' , [ 'receiver_id' => $info->id ]) }}"
-                            target="__blank" class="flex"> 
+                            href="{{ route('messages' , [ 'receiver_id' => $info->connection_id ]) }}"
+                            target="__blank" class="flex items-center"> 
 
                             <div>
                                 <img class="h-10 w-10 rounded-full object-cover" src="{{ asset($photo_url) }}"/>
                             </div>
 
                             <div class="grid mx-4" >
-                                <strong id="{{ __('connection-name-') . $info->id }}">{{ $info->name }}</strong> 
-                                <span>{{ $info->username }}</span>
-                                @livewire('user-active-status' , ['userId' => $info->id ])
+                                <p class="text-2xl text-gray-800 font-bold capitalize" id="{{ __('connection-name-') . $info->connection_id }}">
+                                    {{ $info->connection_name }}
+                                </p> 
+                                <p class="text-black">{{ $info->connection_username }}</p>
+                                @livewire('user-active-status' , ['userId' => $info->connection_id ])
                             </div>
 
                         </x-jet-dropdown-link>    
 
                     </div> 
 
-                    @livewire('delete-connection', ['userId' => $info->id, 'authId' => Auth::id() ])
+                    @livewire('delete-connection', ['userId' => $info->connection_id ])
 
                 </div>
 

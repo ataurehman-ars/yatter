@@ -8,7 +8,7 @@
             @foreach($listRequests as $info)
 
                 <div class="mt-4 grid sm:flex sm:flex-grow-0 flex-grow content-center">
-                    <div class="flex">
+                    <div class="flex items-center">
 
                         @php 
                             $img_url = $info->profile_photo_path ? 
@@ -21,12 +21,14 @@
                         </div>
 
                         <div class="grid ml-4">
-                            <strong>{{ $info->name }}</strong> 
-                            <span>{{ $info->username }}</span>
+                            <p class="text-4xl text-gray-800">{{ $info->name }}</p> 
+                            <p class="text-gray-800 font-bold">{{ $info->username }}</p>
                         </div>   
                     </div> 
 
-                    @livewire('accept-user', ['userId' => $info->id, 'authId' => Auth::id() , 'req_username' => $info->username])
+                    @livewire('accept-user', 
+                    ['userId' => $info->id , 'req_username' => $info->username , 
+                    'req_name' => $info->name , 'req_photo_url' => $info->profile_photo_path ])
 
                 </div>
 

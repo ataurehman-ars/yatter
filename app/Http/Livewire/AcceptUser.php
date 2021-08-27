@@ -5,20 +5,26 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
+use Auth;
+
 class AcceptUser extends Component
 {
 
     public $userId;
     public $authId;
     public $req_username;
+    public $req_name;
+    public $req_photo_url;
     public $ack;
     public $reload_page;
 
-    public function mount($userId, $authId, $req_username)
+    public function mount($userId, $req_username, $req_name , $req_photo_url)
     {
         $this->userId = $userId;
-        $this->authId = $authId;
+        $this->authId = Auth::id();
         $this->req_username = $req_username;
+        $this->req_name = $req_name;
+        $this->req_photo_url = $req_photo_url;
         $this->ack = '';
         $this->reload_page = false;
     }
@@ -46,12 +52,21 @@ class AcceptUser extends Component
 
     public function makeConnection()
     {
-        $is_done = DB::table('connections')->insert([
-            'user_id' => $this->authId , 
-            'connection_id' => $this->userId
+        $added_1 = DB::table('connections_' . $this->authId)->insert([
+            'connection_id' => $this->userId , 
+            'connection_name' => $this->req_name , 
+            'connection_username' => $this->req_username ,
+            'connection_photo_url' => $this->req_photo_url  
         ]);
 
-        if ($is_done){
+        $added_2 = DB::table('connections_' . $this->userId)->insert([
+            'connection_id' => Auth::id() , 
+            'connection_name' => Auth::user()->name , 
+            'connection_username' => Auth::user()->username  ,
+            'connection_photo_url' => Auth::user()->profile_photo_path   
+        ]);
+
+        if ($added_1 && $added_2){
 
             $this->deleteRequest();
             $this->ack = "accepted";

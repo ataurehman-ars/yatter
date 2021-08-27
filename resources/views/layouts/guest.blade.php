@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -16,9 +17,20 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
+
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans text-gray-900 antialiased" id="login-content">
             {{ $slot }}
         </div>
     </body>
 </html>
+
+
+<script type="text/javascript">
+
+    Array.from(document.querySelectorAll("#login-content div"))
+    .forEach(div => div.style.backgroundColor = "transparent")
+
+</script>
+
+

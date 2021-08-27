@@ -1,6 +1,6 @@
 
 
-<div class="container mx-auto my-4 h-64 overflow-y-scroll grid justify-items-stretch bg-white" id="chat-interface-{{ $other_id }}">
+<div class="container mx-auto my-4 h-64 overflow-y-scroll grid justify-items-stretch bg-black rounded" id="chat-interface-{{ $other_id }}">
     @foreach (array_reverse(json_decode(json_encode($messages))) as $message)
 
             @php
@@ -8,14 +8,14 @@
             @endphp
 
         @if ($message->sent_from == Auth::id())
-            <div class="m-2 justify-self-end rounded bg-purple-600 text-white px-3 py-1 sender-{{ Auth::id() }}">
-                <p class=""> {{ $encrypted_msg }}</p>
-                <p class="text-xs"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
+            <div class="m-2 justify-self-end border-r-4 border-purple-600  px-3 py-1 sender-{{ Auth::id() }}">
+                <p class="text-white text-xl"> {{ $encrypted_msg }}</p>
+                <p class="text-blue-300"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
             </div>
         @else
-            <div class="m-2 justify-self-start rounded bg-green-500 text-white px-3 py-1 sender-{{ $other_id }}">
-                <p class="">{{ $encrypted_msg }}</p>
-                <p class="text-xs"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
+            <div class="m-2 justify-self-start border-l-4 border-green-300 px-3 py-1 sender-{{ $other_id }}">
+                <p class="text-white text-xl">{{ $encrypted_msg }}</p>
+                <p class="text-blue-300"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
             </div>
         @endif        
 

@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-
+use Auth;
 
 class RequestsUser extends Component
 {
@@ -12,9 +12,9 @@ class RequestsUser extends Component
     public $authId;
     public $listRequests;
 
-    public function mount($authId)
+    public function mount()
     {
-        $this->authId = $authId;
+        $this->authId = Auth::id();
 
         $this->listRequests = DB::table('users')
         ->join('requests', function($join)

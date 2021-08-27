@@ -65,7 +65,7 @@ class UpdatePost extends Component
         $delete_comments = Comments::where('post_id' , $this->post_id)
         ->delete();
 
-        if ($is_deleted && $delete_comments){
+        if ($is_deleted){
             $this->emit('postDeleted');
         }
     }

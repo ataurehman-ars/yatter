@@ -1,7 +1,14 @@
 
-<x-app-layout>
 
-    @livewire('requests-user' , ['authId' => Auth::id()])
-    
-</x-app-layout>
+<x-main-header />
 
+    <x-app-layout>
+
+        @livewire('requests-user')
+
+    </x-app-layout>
+
+    <x-aside />
+
+<x-main-footer />
+        

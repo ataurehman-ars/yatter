@@ -43,8 +43,6 @@ class GetComments extends Controller
 
         $paginate = $comments->paginate(15, ['*'] , 'page' , $page)->withPath('/view-post?post_id=' . $post_id);
 
-        //Cache::put('all-comments-post-' . $post_id , json_encode($comments->paginate(15)), Carbon::now()->addMinutes(120));
-
 
         for ($i = 1 ; $i <= $paginate->lastPage()  ; $i++){
             Cache::put('comments-post-' . $post_id . '-page-' . $i , 

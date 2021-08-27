@@ -17,6 +17,11 @@ module.exports = {
             screens : {
                 sm : '450px'
             } ,
+
+            backgroundImage: theme => ({
+                'hero-pattern': "url('/img/hero-pattern.svg')",
+                'footer-texture': "url('/img/footer-texture.png')",
+            }) , 
         },
     },
 

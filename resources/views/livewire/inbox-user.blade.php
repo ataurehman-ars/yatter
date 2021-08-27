@@ -1,43 +1,31 @@
 
 
-<div>
+<div class='inbox-container'>
+
+    <style>
+
+        .sent-from {
+            color : gray;
+            display : inline-block;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        var decrypted_msgs = {}
+    </script>
+
     @if (count($collector))
+
+    <div id="inbox">
 
         @foreach($collector as $collect)
 
-            <x-jet-dropdown-link 
-                href="{{ route('messages' , [ 'receiver_id' => $collect->id ]) }}"
-                target="__blank" class="flex"> 
-
-                <div id="chat-id-{{ $collect->id }}" class="">
-
-                    @php 
-                        $decrypt_msg = Crypt::decryptString($collect->msg);
-
-                        $photo_path = $collect->profile_photo_path 
-                        ? 'uploads/' . $collect->profile_photo_path
-                        : 'uploads/profile-photos/user.png';
-
-                    @endphp 
-
-                    <div>
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ asset($photo_path) }}" >
-                    <div>
-
-                    <div class="grid mx-2">
-                        <p><strong>{{ $collect->username }}</strong></p>
-                        <p>
-                            <small style="{ fontSize: 10px; }">{{ $collect->sent_from_own ? 'You: ' : ''  }}</small>
-                            <span class="decrypted-msg"> {{ $decrypt_msg }}</span>
-                        </p>
-                    </div>
-
-                </div>
-
-            </x-jet-dropdown-link>   
+            @livewire('chat-person' , ['collect' => $collect])
 
         @endforeach 
 
+    </div>
 
     @else 
         <div class="flex items-center justify-center mt-16">
@@ -45,8 +33,11 @@
         </div>  
 
     @endif 
-
+   
+    
 </div>
+
+
 
 
 

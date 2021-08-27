@@ -28,11 +28,11 @@
         date = document.createElement('p') , 
         comment = document.createElement('p')
 
-        wrap_comment.classList = "mx-auto mb-1 rounded flex items-center border-b-2 border-light-blue-500 comment-wrapper"
+        wrap_comment.classList = "mx-auto mb-2 flex items-center comment-wrapper"
 
         wrap_comment.innerHTML = 
         `<div class="grid">
-            <div class="flex">
+            <div class="flex items-center">
                 <div>
                     <img class="h-8 w-8 rounded-full mr-2 object-cover" src=${img_src} />
                 </div>
@@ -90,16 +90,16 @@
 
     @if ($filter == "recent")
 
-        <div wire:loading class="mx-auto my-4">
-            loading all comments...
+        <div wire:loading class="mx-auto my-2 flex justify-center">
+            <img class="h-8 w-8 rounded-full object-cover" src="{{ asset('loading/loading.gif') }}" />
         </div>
 
         {{ App\Http\Controllers\RecentComments::getRecentComments($postId) }}
 
     @elseif ($filter == "all")
 
-        <div wire:loading class="mx-auto my-4">
-            loading recent comments...
+        <div wire:loading class="mx-auto my-2 flex justify-center">
+            <img class="h-8 w-8 rounded-full object-cover" src="{{ asset('loading/loading.gif') }}" />
         </div>
 
         {{ App\Http\Controllers\GetComments::getCommentsView($postId, $page_number) }}

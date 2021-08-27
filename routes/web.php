@@ -9,6 +9,7 @@ use App\Http\Controllers\MessagesController as MessagesController;
 use App\Http\Controllers\GetComments as GetComments;
 use App\Http\Controllers\RecentComments as RecentComments;
 use App\Http\Controllers\ListCaches as ListCaches;
+use App\Http\Controllers\AllPosts as AllPosts;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -21,6 +22,8 @@ Route::get('/view-post' , [PostController::class, 'returnPost'])->name('view-pos
 Route::get('/messages' , [MessagesController::class, 'returnMessageInterface'])->name('messages')->middleware('auth');
 
 Route::get('/get-comments' , [GetComments::class, 'returnCommentsView'])->name('view-comments')->middleware('auth');
+
+Route::get('/all-posts' , [AllPosts::class, 'returnAllPosts'])->name('all-posts')->middleware('auth');
 
 Route::get('/recent-comments' , [RecentComments::class, 'getRecentComments'])->name('recent-comments')->middleware('auth');
 

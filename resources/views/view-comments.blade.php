@@ -1,10 +1,11 @@
 
+@if(count($comments))
 
 <div id="rendered-comments">
 
     @foreach( $comments as $comment )
 
-    <div class="mx-auto mb-1 rounded flex items-center border-b-2 border-light-blue-500 comment-wrapper">
+    <div class="mx-auto mb-1 flex items-center comment-wrapper mb-4">
 
         @php 
 
@@ -15,7 +16,7 @@
         @endphp 
 
         <div class="grid">
-            <div class="flex">
+            <div class="flex items-center">
                 <div>
                     <img class="h-8 w-8 rounded-full mr-2 object-cover" src="{{ asset($image_url) }}" />
                 </div>
@@ -38,16 +39,22 @@
 
     @php 
         try {
-            $links = $comments->links();
+            $links = gettype($comments) != "array" ? $comments->links() : '';
         }
         catch (Exception $e){
             $links = '';
         }
     @endphp 
 
-    {{ $links }}
+    {{ $links ?: $links }}
 
 </div>
 
+@else
 
+    <div class="flex items-center justify-center mt-16">
+        <p>{{ __('No Comments') }}</p>
+    </div> 
+
+@endif 
 

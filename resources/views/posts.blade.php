@@ -1,8 +1,18 @@
 
 
-<x-app-layout>
-    @livewire('new-post' , ['authId' => Auth::id() ])
-    @livewire('get-posts' , ['authId' => Auth::id() ])
-</x-app-layout>
+<x-main-header />
+
+    <x-app-layout>
+
+        @livewire('new-post')
+        @livewire('get-posts')
+
+    </x-app-layout>
+
+    <x-aside />
+
+<x-main-footer />
+
+
 
 

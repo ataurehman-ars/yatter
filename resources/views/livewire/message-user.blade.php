@@ -10,10 +10,10 @@
         id="msg"
         name="message" 
         placeholder="{{ __('type new message') }}"
-        class="resize-none border-gray-400 container lg rounded h-32">
+        class="resize-none border-gray-400 container lg rounded h-16 shadow-lg">
     </textarea>
 
-    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded my-2"
+    <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
     wire:click="sendMessage" id="msg-btn">
         {{__('Send Message')}}
     </button>
@@ -31,15 +31,16 @@
 
         wrap_msg.appendChild(p)
 
-        wrap_msg.classList = "m-2 justify-self-start rounded bg-green-500 text-white px-3 py-1 sender-{{ $receiver_id }}"
+        wrap_msg.classList = "m-2 text-white text-xl justify-self-start border-l-4 border-green-300 px-3 py-1 sender-{{ $receiver_id }}"
 
         if (from_self){
 
-            wrap_msg.classList = "m-2 justify-self-end rounded bg-purple-600 text-white px-3 py-1"
+            wrap_msg.classList = "m-2 text-white text-xl justify-self-end border-r-4 border-purple-600 px-3 py-1"
 
             let small = document.createElement("small")
-            small.className = "seen-notifier"
+            //small.className = "seen-notifier"
             small.textContent = "{{ Cache::has('user-active-' . $receiver_id) ? 'Delivered' : 'Sent' }}"
+            small.classList = "seen-notifier text-blue-300"
             small.style.fontSize = "10px"
             wrap_msg.appendChild(small)
             chat_interface.insertBefore(wrap_msg, document.getElementById('typing'))
@@ -68,13 +69,8 @@
 
 <script type="module">
 
-    Echo.channel(`private-newmessageto.{{ $auth_id }}`)
-    .listen('NewMessage' , e => {
-
-        Livewire.emit(`decrypt-msg-{{ $receiver_id }}`, e.message)
-    })
-
     Livewire.on('msg-encrypted-{{ $receiver_id }}' , msg => {
+        
         updateInterface(msg, false)
     })
 

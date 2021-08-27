@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b02b8bcc260cff347ef3d1b224c85a9",
+    "content-hash": "9f293a62616f76c59412ae491c352d7f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -471,6 +471,53 @@
                 "source": "https://github.com/dnoegel/php-xdg-base-dir/tree/v0.1.1"
             },
             "time": "2019-12-04T15:06:13+00:00"
+        },
+        {
+            "name": "dnsimmons/openweather",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dnsimmons/openweather.git",
+                "reference": "d67ac3629feca69fa8a1b1d970c192d7ec37a9ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dnsimmons/openweather/zipball/d67ac3629feca69fa8a1b1d970c192d7ec37a9ec",
+                "reference": "d67ac3629feca69fa8a1b1d970c192d7ec37a9ec",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dnsimmons\\OpenWeather\\OpenWeatherServiceProvider"
+                    ],
+                    "aliases": {
+                        "OpenWeather": "Dnsimmons\\OpenWeather\\OpenWeather"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dnsimmons\\OpenWeather\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Dave Simmons",
+                    "email": "hello@dsimmons.me"
+                }
+            ],
+            "description": "OpenWeather is a Laravel package simplifying working with the free Open Weather Map APIs.",
+            "support": {
+                "issues": "https://github.com/dnsimmons/openweather/issues",
+                "source": "https://github.com/dnsimmons/openweather/tree/1.0.6"
+            },
+            "time": "2021-08-10T23:13:20+00:00"
         },
         {
             "name": "doctrine/cache",

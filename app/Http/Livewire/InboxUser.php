@@ -6,25 +6,37 @@ use Livewire\Component;
 use App\Models\Messages;
 
 use DB;
+use Crypt;
+use Auth;
 
 class InboxUser extends Component
 {
+
     public $auth_id;
     public $collector;
     public $recents;
 
-    public function mount($auth_id)
+    public function mount()
     {
-        $this->auth_id = $auth_id;
+        $this->auth_id = Auth::id();
         $this->collector = [];
         $this->recents = [];
         $this->listRecents();
+    }
+
+    public function getListeners()
+    {
+        return [
+            "echo-private:firstmessageto.{$this->auth_id},FirstMessage" => "listRecents" ,  
+        ];
     }
 
     public function render()
     {
         return view('livewire.inbox-user');
     }
+
+   
 
     public function listRecents()
     {
@@ -60,7 +72,11 @@ class InboxUser extends Component
 
     
     }
+
+
+    
 }
+
 
 
 

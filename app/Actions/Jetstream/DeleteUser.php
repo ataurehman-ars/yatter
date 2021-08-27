@@ -22,6 +22,7 @@ class DeleteUser implements DeletesUsers
 
         if ($user_deleted){
             Schema::dropIfExists('messages_' . $collect_id);
+            Schema::dropIfExists('connections_' . $collect_id);
             return;
         }
     }

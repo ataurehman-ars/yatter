@@ -1,0 +1,32 @@
+
+.master-container {
+    position : relative;
+    top : 0;
+    left : 0;
+    width : 100vw;
+    height: 100vh;
+    overflow-x : hidden !important;
+    background : url(../welcome-img/brain.jpg) no-repeat;
+    background-size : cover;
+    background-position : center center;
+    background-attachment : fixed;
+    overflow-y  : hidden !important;
+}
+
+.form-container  {
+    position : absolute;
+    left : 50%;
+    top : 50%;
+    transform : translate(-50%, -50%);
+    width : 40%;
+    box-sizing : border-box;
+    margin : 0;
+}
+
+
+
+@media(max-width : 650px){
+    .form-container {
+        width : 90%;
+    }
+}

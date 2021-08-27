@@ -17,18 +17,20 @@ class NewMessage implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $receiver_id;
+    public $sender_id;
     public $message;
     
-    public function __construct($receiver_id, $message)
+    public function __construct($receiver_id, $sender_id ,  $message)
     {
         $this->receiver_id = $receiver_id;
+        $this->sender_id = $sender_id;
         $this->message = $message;
     }
 
     
     public function broadcastOn()
     {
-        return new PrivateChannel('newmessageto.' . $this->receiver_id);
+        return new PrivateChannel("newmessageto.{$this->receiver_id}.{$this->sender_id}");
     }
 }
 

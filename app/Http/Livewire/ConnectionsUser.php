@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
+use Auth;
 
 class ConnectionsUser extends Component
 {
@@ -12,29 +13,24 @@ class ConnectionsUser extends Component
     public $authId;
     public $listConnections;
 
-    public function mount($authId)
+    public function mount()
     {
-        $this->authId = $authId;
-
-        $this->listConnections = [];  
+        $this->authId = Auth::id();
         
-        $ids = DB::table('connections')
-        ->where('user_id' , $this->authId)
-        ->orWhere('connection_id' , $this->authId)
-        ->select('user_id' , 'connection_id')
+        $this->listConnections = DB::table('connections_' . $this->authId)
+        ->select('connection_id' , 'connection_name' , 'connection_username' , 'connection_photo_url')
         ->get();
 
-        foreach($ids as $id){
+        // foreach($ids as $id){
 
-            $select_id = (int)$id->user_id === (int)$this->authId ? $id->connection_id : $id->user_id;
-            $user = DB::table('users')->where('id' , $select_id)
-            ->select('id' , 'name' , 'username' ,'email' , 'profile_photo_path')
-            ->get();
+        //     $select_id = (int)$id->user_id === (int)$this->authId ? $id->connection_id : $id->user_id;
+        //     $user = DB::table('users')->where('id' , $select_id)
+        //     ->select('id' , 'name' , 'username' ,'email' , 'profile_photo_path')
+        //     ->get();
 
-            array_push($this->listConnections, (object)$user[0]);
+        //     array_push($this->listConnections, (object)$user[0]);
 
-        }
-
+        // }
 
     }
 
