@@ -17,6 +17,7 @@ class RecentComments extends Controller
         $recent_exists = Cache::get('recent-comments-' . $post_id);
 
         if ($recent_exists && count($recent_exists)){
+
             return view('view-comments' , [
                 'comments' => $recent_exists , 
                 'post_id' => $post_id , 
@@ -29,7 +30,7 @@ class RecentComments extends Controller
             $join->on('comments.author_id' , '=' , 'users.id');
         })
         ->select('users.id' , 'users.name' , 'users.username' , 
-        'users.profile_photo_path' , 'comments.comment', 'comments.created_at')
+        'users.profile_photo_path' ,'comments.comment_id' , 'comments.comment', 'comments.created_at')
         ->orderBy('comments.created_at' , 'desc')
         ->take(20)
         ->get();

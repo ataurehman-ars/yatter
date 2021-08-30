@@ -12,9 +12,9 @@ class CountPosts extends Component
     public $auth_id;
     public $count_posts;
 
-    public function mount()
+    public function mount($auth_id)
     {
-        $this->auth_id = Auth::id();
+        $this->auth_id = $auth_id;
         $this->count_posts  = DB::table('posts')->where('author_id' , $this->auth_id)->count();
         
     }

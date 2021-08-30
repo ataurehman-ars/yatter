@@ -12,8 +12,12 @@ use App\Http\Controllers\ListCaches as ListCaches;
 use App\Http\Controllers\AllPosts as AllPosts;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('home.home');
 });
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 Route::get('/profile' , [ProfileController::class, 'returnProfile'])->name('profile');
 
@@ -35,27 +39,27 @@ Route::post('/logged-out' , [LoggedOut::class, 'changeActiveStatus']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
     return view('posts');
-})->name('posts');
+})->name('posts')->middleware('auth');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/search', function () {
     return view('search');
-})->name('search');
+})->name('search')->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/inbox', function () {
     return view('inbox');
-})->name('inbox');
+})->name('inbox')->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/requests', function () {
     return view('requests');
-})->name('requests');
+})->name('requests')->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/connections', function () {
     return view('connections');
-})->name('connections');
+})->name('connections')->middleware('auth');
 
 

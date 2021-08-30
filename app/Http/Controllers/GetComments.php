@@ -37,7 +37,7 @@ class GetComments extends Controller
             $join->on('comments.author_id' , '=' , 'users.id');
         })
         ->select('users.id' , 'users.name' , 'users.username' , 
-        'users.profile_photo_path' , 'comments.comment', 'comments.created_at')
+        'users.profile_photo_path' ,'comments.comment_id' , 'comments.comment', 'comments.created_at')
         ->orderBy('comments.created_at' , 'desc')
         ->take(100);
 

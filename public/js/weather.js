@@ -73,4 +73,27 @@ document.getElementById("weather-city").onkeyup = function(){
     }
 }
 
+var weather_container = document.getElementById("weather-container")
+
+document.getElementById("only-w").onclick = () => {
+    
+    weather_container.style.display = "block"
+    weather_container.classList += " hide-all"
+}
+
+document.getElementById("only-close").onclick = () => {
+    
+    weather_container.style.display = "none"
+    weather_container.classList = "weather-container"
+}
+
+
+onresize = () => {
+    if (innerWidth >= 800){
+        console.log("yes")
+        weather_container.classList = "weather-container"
+    }
+}
+
+
 

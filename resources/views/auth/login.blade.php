@@ -2,7 +2,38 @@
 
 <div>
 
+    <style>
+        .loading {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 50000;
+            background: #fff;
+        }
+
+        .loading img {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 50px;
+            width: 50px;
+            color: #000;
+        }
+
+        .unload {
+            display: none;
+        }
+
+    </style>
+
     <link rel="stylesheet" href = "{{ asset('css/background.css') }}" type="text/css">
+
+    <div class = "loading">
+            <img src = "{{ asset('loading/loading.gif') }}">
+    </div>
     
     <div class="master-container">
 
@@ -78,6 +109,10 @@
         .forEach(label => label.classList = "block text-xl text-gray-800")
 
         document.getElementById("login-form").parentElement.style.backgroundColor = "#fff"
+
+        onload = () => {
+            document.getElementsByClassName("loading")[0].style.display = "none"
+        }
 
     </script>
 

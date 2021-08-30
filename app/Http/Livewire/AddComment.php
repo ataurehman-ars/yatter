@@ -78,6 +78,8 @@ class AddComment extends Component
 
 
                 if($comment_added){
+
+                    $random_key = md5($encrypt . Carbon::now());
                     
                     broadcast(new NewComment($this->postId, Auth::user()->username, 
                     Auth::user()->profile_photo_path, $encrypt))->toOthers();
@@ -87,11 +89,11 @@ class AddComment extends Component
                         $this->user = User::where('id' , $this->author_id)->first();
                 
                         Notification::send($this->user, 
-                        new CommentDone($this->username, $this->photo_path, $this->postId));
+                        new CommentDone($this->username, $this->photo_path, $this->postId, $random_key));
                     }
 
                     $this->emit('update-comment-section-' . $this->postId, $this->comment);
-                    $this->addToCache($this->comment);
+                    $this->addToCache($encrypt, $random_key);
                     $this->comment = '';
                 }
 
@@ -105,7 +107,7 @@ class AddComment extends Component
     }
 
 
-    public function addToCache($cmt)
+    public function addToCache($cmt, $key)
     {
         try {
 
@@ -116,15 +118,16 @@ class AddComment extends Component
             }
 
             $obj = [
+                "comment_id" => $key , 
                 "id" => $this->authId , 
                 "username" => Auth::user()->username , 
                 "profile_photo_path" => Auth::user()->profile_photo_path ,
                 "created_at" => Carbon::now() , 
-                "comment" => Crypt::encryptString($cmt) 
+                "comment" =>  $cmt 
             ];
 
             array_unshift($recent_comments, (object)$obj);
-            Cache::put('recent-comments-' . $this->postId , $recent_comments, 60);
+            Cache::put('recent-comments-' . $this->postId , $recent_comments, Carbon::now()->addMinutes(60));
         }
 
         catch (Exception $e){

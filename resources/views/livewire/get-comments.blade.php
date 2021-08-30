@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="grid">
-                <p class="text-lg my-1 break-normal overflow-ellipsis">${c}</p>
+                <p class="my-1 break-normal overflow-ellipsis flex break-all">${c}</p>
             </div>
         </div>`
 

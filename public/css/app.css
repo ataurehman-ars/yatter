@@ -752,9 +752,9 @@ select {
   width: 100%;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 640px) {
   .container {
-    max-width: 450px;
+    max-width: 640px;
   }
 }
 
@@ -15457,7 +15457,7 @@ select {
 }
 
 .max-w-screen-sm {
-  max-width: 450px;
+  max-width: 640px;
 }
 
 .max-w-screen-md {
@@ -32725,14 +32725,14 @@ select {
           animation: bounce 1s infinite;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 640px) {
   .sm\:container {
     width: 100%;
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: 640px) {
     .sm\:container {
-      max-width: 450px;
+      max-width: 640px;
     }
   }
 
@@ -47435,7 +47435,7 @@ select {
   }
 
   .sm\:max-w-screen-sm {
-    max-width: 450px;
+    max-width: 640px;
   }
 
   .sm\:max-w-screen-md {
@@ -64630,9 +64630,9 @@ select {
     width: 100%;
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: 640px) {
     .md\:container {
-      max-width: 450px;
+      max-width: 640px;
     }
   }
 
@@ -79335,7 +79335,7 @@ select {
   }
 
   .md\:max-w-screen-sm {
-    max-width: 450px;
+    max-width: 640px;
   }
 
   .md\:max-w-screen-md {
@@ -96530,9 +96530,9 @@ select {
     width: 100%;
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: 640px) {
     .lg\:container {
-      max-width: 450px;
+      max-width: 640px;
     }
   }
 
@@ -111235,7 +111235,7 @@ select {
   }
 
   .lg\:max-w-screen-sm {
-    max-width: 450px;
+    max-width: 640px;
   }
 
   .lg\:max-w-screen-md {
@@ -128430,9 +128430,9 @@ select {
     width: 100%;
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: 640px) {
     .xl\:container {
-      max-width: 450px;
+      max-width: 640px;
     }
   }
 
@@ -143135,7 +143135,7 @@ select {
   }
 
   .xl\:max-w-screen-sm {
-    max-width: 450px;
+    max-width: 640px;
   }
 
   .xl\:max-w-screen-md {
@@ -160330,9 +160330,9 @@ select {
     width: 100%;
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: 640px) {
     .\32xl\:container {
-      max-width: 450px;
+      max-width: 640px;
     }
   }
 
@@ -175035,7 +175035,7 @@ select {
   }
 
   .\32xl\:max-w-screen-sm {
-    max-width: 450px;
+    max-width: 640px;
   }
 
   .\32xl\:max-w-screen-md {

@@ -9,12 +9,14 @@ class SelectComments extends Component
     public $postId;
     public $recents;
     public $page_number;
+    public $category;
     
     public function mount($postId, $page_number)
     {
         $this->postId = $postId;
-        $this->recents = '';
         $this->page_number = $page_number;
+        $this->recents = 'recent';
+        $this->category = '';
     }
 
     public function render()
@@ -24,6 +26,7 @@ class SelectComments extends Component
 
     public function updatedRecents()
     {
+        $this->category = $this->recents;
         $this->emit("filter-comments-" . $this->postId , $this->recents, $this->page_number);
     }
 }

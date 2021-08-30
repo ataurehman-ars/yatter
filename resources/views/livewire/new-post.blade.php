@@ -1,17 +1,17 @@
 
-<div class="mx-2">
+<div class="mx-auto">
 
-    <div class="container mx-auto my-4 ">
-        <textarea class="resize-none border-transparent container lg h-64 shadow-lg rounded bg-gray-200" 
+    <div class="mx-auto my-4">
+        <textarea class="border-transparent h-32 shadow-lg rounded bg-gray-200 block mx-auto new-post-textarea" 
             id="write-post"
             placeholder="{{ __('New Post') }}"
             name="post"
             wire:model.defer="post">
         </textarea>
 
-        <form class="grid my-2">
+        <form class="grid my-2 justify-items-center">
         @if ($postImg)
-            <img class="h-40 w-40 object-contain rounded" src="{{ $postImg->temporaryUrl() }}">
+            <img class="h-40 w-40 object-contain rounded uploaded-img" src="{{ $postImg->temporaryUrl() }}">
         @endif
             <div id="post-file" class="grid">
                 <span>{{ __('Choose a related photo') }}</span>
@@ -26,8 +26,8 @@
     </div>
 
 
-    <div class="container mx-auto my-2 flex content-center">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+    <div class="container mx-auto my-2 flex justify-center content-center">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg post-button"
         wire:click="publish()"
         id="publish-post">
             {{ __('Post') }}

@@ -5,7 +5,7 @@
 
     @foreach( $comments as $comment )
 
-    <div class="mx-auto mb-1 flex items-center comment-wrapper mb-4">
+    <div id="comment-{{ $comment->comment_id }}" class="mx-auto mb-1 flex items-center comment-wrapper mb-4">
 
         @php 
 
@@ -30,7 +30,9 @@
                 </div>
             </div>
             <div class="grid">
-                <p class="text-lg my-1 break-normal overflow-ellipsis">{{ Crypt::decryptString($comment->comment) }}</p>
+                <p class="font-semi-bold my-1 break-normal overflow-ellipsis flex break-all">
+                    {{ Crypt::decryptString($comment->comment) }}
+                </p>
             </div>
         </div>
     </div>

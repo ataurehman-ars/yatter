@@ -11,6 +11,7 @@ class PostController extends Controller
     public function returnPost(Request $req)
     {
         $post_id = $req->get('post_id');
+        $scroll_target = $req->get('comment_id') ?: "";
 
         //$post_contents = Posts::where('post_id' , $post_id)
         //->select('post' , 'created_at' , 'related_photo')
@@ -26,7 +27,8 @@ class PostController extends Controller
 
         return view('view-post')
         ->with('post_id' , $post_id)
-        ->with('post_contents' , $post_contents);
+        ->with('post_contents' , $post_contents)
+        ->with('comment_id' , $scroll_target);
     }
 }
 

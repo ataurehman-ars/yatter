@@ -15,7 +15,7 @@ module.exports = {
             },
 
             screens : {
-                sm : '450px'
+                sm : '640px' , 
             } ,
 
             backgroundImage: theme => ({

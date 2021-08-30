@@ -1,8 +1,8 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-fixed">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="override-nav flex">
 
                 <!-- Navigation Links -->
 
@@ -177,7 +177,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden override-res-nav">
 
         <div class="pt-2 pb-3 space-y-1 nav home">
             <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">

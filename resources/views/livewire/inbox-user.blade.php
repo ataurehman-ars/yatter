@@ -17,7 +17,7 @@
 
     @if (count($collector))
 
-    <div id="inbox">
+    <div id="inbox" class="w-screen">
 
         @foreach($collector as $collect)
 

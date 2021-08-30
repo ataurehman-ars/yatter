@@ -6,7 +6,7 @@
     name="comment"
     id="write-comment"
     placeholder="{{ __('Comment') }}" 
-    class="resize-none border-gray-400 container lg rounded ">
+    class="resize-none border-none bg-gray-200 font-semibold container shadow-lg rounded ">
     </textarea>
 
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg mt-2"

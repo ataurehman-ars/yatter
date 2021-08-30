@@ -18,11 +18,11 @@ class GetComments extends Component
     public $filter;
     public $page_number;
 
-    public function mount($postId)
+    public function mount($postId, $page_number)
     {
         $this->postId = $postId;
         $this->comments = [];
-        $this->filter = 'all';
+        $this->filter = $page_number === 1 ? 'recent' : 'all';
         $this->page_number = 0;
     }
 

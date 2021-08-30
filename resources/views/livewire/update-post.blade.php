@@ -1,23 +1,18 @@
-<div class="mt-2">    
-    <style>
 
-        .update {
-            color : #fff;
-        }
-
-    </style>
+<div class="">    
+    
 
 @if (!$edit)
-    <div class="flex my-2">
-        <div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg mr-2"
+    <div class="flex justify-end my-2">
+        <div class="edit-post">
+            <button class="bg-transparent font-bold mr-4"
             wire:click="editMode">
             <i class="far fa-edit update"></i>
                 {{ __('Edit') }}
             </button>
         </div>
-        <div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+        <div class="delete-post">
+            <button class="bg-transparent font-bold"
             wire:click="deletePost">
             <i class="fas fa-trash update"></i>
                 {{ __('Delete') }}
@@ -37,17 +32,17 @@
             </textarea>
         </div>
 
-        <div class="flex my-2">
-            <div>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg mr-2"
+        <div class="flex justify-end my-2">
+            <div class="update-post">
+                <button class="bg-transparent font-bold mr-4"
                 wire:click="savePost">
                 <i class="fas fa-check update"></i>
                     {{ __('Update') }}
                 </button>
             </div>
 
-            <div class="mx-2">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+            <div class="cancel-edit">
+                <button class="bg-transparent font-bold"
                 wire:click="cancelEdit">
                 <i class="fas fa-times update"></i>
                     {{ __('Cancel') }}

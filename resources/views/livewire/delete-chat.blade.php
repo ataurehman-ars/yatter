@@ -1,11 +1,10 @@
 
-<div >
+<div class="" >
     <link rel="stylesheet" href="{{ mix('css/style.css') }}">    
     <div>
         <button wire:click="deleteChat" 
-        class="bg-red-500 text-white font-bold py-2 px-4 rounded shadow-lg">
+        class="">
         <i class="fas fa-trash"></i>
-            {{ __('Delete Chat') }}
         </button>
     </div>
 

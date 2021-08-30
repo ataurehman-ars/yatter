@@ -15,12 +15,14 @@ class CommentDone extends Notification
     public $username;
     public $photo_path;
     public $post_id;
+    public $comment_key;
     
-    public function __construct($username , $photo_path , $post_id)
+    public function __construct($username , $photo_path , $post_id, $comment_key)
     {
         $this->username = $username;
         $this->photo_path = $photo_path;
         $this->post_id = $post_id;
+        $this->comment_key = $comment_key;
     }
 
     
@@ -54,6 +56,7 @@ class CommentDone extends Notification
             'username' => $this->username,
             'photo_path' => $this->photo_path, 
             'post_id' => $this->post_id , 
+            'comment_key' => $this->comment_key , 
         ]);
     }
 

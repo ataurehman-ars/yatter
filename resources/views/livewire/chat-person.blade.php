@@ -1,12 +1,10 @@
 
 <div class="">
 
-    <div id="chat-container-{{ $collect['id'] }}">
-        <x-jet-dropdown-link 
-            href="{{ route('messages' , [ 'receiver_id' => $collect['id'] ]) }}"
-            target="__blank" class="flex items-center"> 
+    <div id="chat-container-{{ $collect['id'] }}" class="flex items-center justify-around">
+        
 
-            <div id="chat-id-{{ $collect['id'] }}" class="chats flex items-center mt-4 border-2 border-white rounded px-4 py-2">
+            <div id="chat-id-{{ $collect['id'] }}" class="chats flex items-center mt-4 px-4 py-2">
 
                 @php 
                     $decrypt_msg = Crypt::decryptString($collect['msg']);
@@ -19,19 +17,23 @@
 
                 <div>
                     <img class="h-10 w-10 rounded-full object-cover" src="{{ asset($photo_path) }}" >
-                <div>
+                </div>
 
-                <div class="grid mx-2">
-                    <p class="text-xl font-bold black">{{ $collect['username'] }}</p>
-                    <p>
-                        <small class="sent-from semi-bold text-2xl">{{ "Me: " }}</small>
-                        <span class="decrypted-msg text-2xl text-black font-semibold"> {{ $decrypt_msg }}</span>
-                    </p>
+                <div>
+                    <a href="{{ route('messages' , [ 'receiver_id' => $collect['id'] ]) }}"
+                        target="__blank" class="flex items-center"> 
+                        <div class="grid mx-2">
+                            <p class="font-bold text-xl">{{ $collect['username'] }}</p>
+                            <p class="flex break-all">
+                                <small class="sent-from font-semibold text-xl">{{ "Me: " }}</small>
+                                <span class="decrypted-msg font-semibold text-xl"> {{ $decrypt_msg }}</span>
+                            </p>
+                        </div>
+                    </a>
                 </div>
 
             </div>
 
-        </x-jet-dropdown-link>   
 
         <script type="module">
 
@@ -78,7 +80,7 @@
 
         @livewire('update-inbox' , ['receiver_id' => $collect['id'] ] )
 
-        <div class="grid sm:flex sm:flex-grow-0 flex-grow content-center">
+        <div class="">
             @livewire('delete-chat' , ['receiver_id' => $collect['id'] ] )
         </div>
 

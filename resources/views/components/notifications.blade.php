@@ -31,17 +31,25 @@
 
         .notif-container {
             overflow-y : scroll;
+            background-color : #fff;
+        }
+
+        @media(max-width : 550px){
+
+            .notif-pointer::after {
+                display: none;
+            }
         }
 
     </style>
 
     <div class="flex items-center">
         <div>
-            <button class="bg-transparent font-semibold py-2 border-none notif-button" id="notif-button">
+            <button class="font-semibold py-2 border-none notif-button" id="notif-button">
                 Notifications
             </button>
         </div>
-        <div class="flex items-center notif-pointer"></div>
+        <div class="flex items-center notif-pointer" id="notif-pointer"></div>
     </div>
 
     <div class="flex-col h-screen fixed inset-y-0 left-0 shadow-xl border-r border-gray-200 px-4 notif-container">
@@ -118,12 +126,17 @@
 
                 if (notif.type === "comment"){
                     a.textContent = notif.username + " has something to say about your post"
+                    a.href = "view-post?post_id=" + notif.post_id + "&comment_id=" + notif.comment_key 
+                }
+
+                if (notif.type === "like"){
+                    a.textContent = notif.username + " likes your post"
+                    a.href = "view-post?post_id=" + notif.post_id 
                 }
 
                 small.textContent = `{{ Carbon\Carbon::now()->format("F j, Y, g:i a") }}`
 
                 a.classList = "block"
-                a.href = "view-post?post_id=" + notif.post_id 
 
                 wrap.append(a, small)
                 li.append(img , wrap)

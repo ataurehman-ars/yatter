@@ -5,12 +5,12 @@
 
 @endphp
 
-<div class="container mx-auto my-4">
+<div class="container mx-auto my-4 sm:w-auto w-screen px-2">
     <textarea wire:model.defer="message" 
         id="msg"
         name="message" 
         placeholder="{{ __('type new message') }}"
-        class="resize-none border-gray-400 container lg rounded h-16 shadow-lg">
+        class="resize-none border-none bg-gray-200 font-semibold container rounded h-16 shadow-lg">
     </textarea>
 
     <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"

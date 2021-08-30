@@ -1,19 +1,24 @@
-<div>
-        
+
+
+<div class="override-container">
 
     @if (count($posts))
 
-        <div class="m-2 md:w-auto">
+        <div class="m-2">
 
             @foreach($posts as $post)
 
-                <div class="flex m-2 md:w-auto border-b border-gray-300 post-links">
-                    <x-jet-dropdown-link 
-                    href="{{ route('view-post' , ['post_id' => $post->post_id]) }}" class="grid"> 
-                            <p class="font-semibold post-text">{{ $auth_name }}</p>
-                            <small class="post-text">{{ Carbon\Carbon::parse($post->created_at)->format("F j, Y, g:i a")  }}</small>    
-                            <p class="font-semibold text-2xl post-text">{{ $post->post }}</p>
-                    </x-jet-dropdown-link>
+                @php 
+                    $skip_text = strlen($post->post) >= 30 ? substr($post->post ,0, 30) . "..." : $post->post;
+                @endphp 
+
+                <div class="m-2 my-4">
+                    <a
+                    href="{{ route('view-post' , ['post_id' => $post->post_id]) }}" class=""> 
+                        <small class="font-bold">{{ $auth_name == "You" ? "" : $auth_name }}</small>
+                        <small class="text-xs">{{ Carbon\Carbon::parse($post->created_at)->format("F j, Y, g:i a")  }}</small>    
+                    </a>
+                    <p class="flex break-all font-bold text-xl">{{ $skip_text }}</p>
                 </div>
 
             @endforeach
