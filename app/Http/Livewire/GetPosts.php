@@ -12,11 +12,15 @@ class GetPosts extends Component
     public $auth_id;
     public $auth_name;
     public $posts = array();
+    public $offset;
+    public $limit;
 
     public function mount($auth_id='' , $auth_name='')
     {
         $this->auth_id = $auth_id ? $auth_id : Auth::id();
         $this->auth_name = $auth_name ? ($auth_name === Auth::user()->username ? 'You' : $auth_name) : 'You';
+        $this->offset = 0;
+        $this->limit = 10;
         $this->getPosts();
     }
 
@@ -30,15 +34,28 @@ class GetPosts extends Component
         return view('livewire.get-posts');
     }
 
+    public function olderPosts()
+    {
+        $this->offset = $this->limit + 1;
+        $this->limit = $this->offset + 10;
+        $this->getPosts();
+    }
+
     public function getPosts()
     {
         $this->posts = 
         Posts::where('author_id' , $this->auth_id)
         ->select('post_id' , 'created_at' , 'post')
         ->orderBy('created_at' , 'desc')
-        ->offset('0')
-        ->limit('10')
+        ->offset($this->offset)
+        ->limit($this->limit)
         ->get();
+
+        if (!count($this->posts)){
+            $this->offset = 0;
+            $this->limit = 10;
+            $this->getPosts();
+        }
     }
 }
 

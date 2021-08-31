@@ -1,4 +1,10 @@
 
+    @if(!count($post_contents))
+
+        <p>Post deleted by author</p>
+
+    @else 
+
     <x-main-header />
 
             <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}">  
@@ -29,7 +35,7 @@
                 </div>    
 
                 <div>
-                    <p class="my-2 semi-bold text-2xl non-italic flex break-all">{{ $content->post }}</p>
+                    <p class="my-2 semi-bold text-4xl non-italic flex break-all">{{ $content->post }}</p>
                 </div>   
 
                 @if ($content->related_photo)
@@ -40,7 +46,13 @@
 
                 <div class="grid">
 
-                    @livewire('like-post' , ['post_id' => $post_id , 'author_id' => $content->id ])
+                    <div class="flex items-center">
+                        @livewire('like-post' , ['post_id' => $post_id , 'author_id' => $content->id ])
+
+                        @if(Auth::id() != $content->id)
+                            @livewire('share-post' , ['post_id' => $post_id, 'post_contents' => $content])
+                        @endauth 
+                    </div>
 
                     @if(Auth::id() == $content->id)
                         @livewire('update-post' , ['post_id' => $post_id , 'post_content' => $content->post])
@@ -95,6 +107,6 @@
     <x-main-footer />
 
         
-
+    @endif 
 
 

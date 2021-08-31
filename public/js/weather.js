@@ -90,7 +90,6 @@ document.getElementById("only-close").onclick = () => {
 
 onresize = () => {
     if (innerWidth >= 800){
-        console.log("yes")
         weather_container.classList = "weather-container"
     }
 }

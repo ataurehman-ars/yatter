@@ -63,7 +63,8 @@ class LoadFeed extends Component
         {
             $likes = DB::table('likes')->where('post_id' , $post->post_id)->count();
             $comments = DB::table('comments')->where('post_id' , $post->post_id)->count();
-            $this->counts['post-' . $post->post_id] = (object)[ 'likes' => $likes , 'comments' => $comments];
+            $shares = DB::table('shares')->where('post_id' , $post->post_id)->count();
+            $this->counts['post-' . $post->post_id] = (object)[ 'likes' => $likes , 'comments' => $comments, 'shares' => $shares];
         }
 
         $this->emit('scroll-top');

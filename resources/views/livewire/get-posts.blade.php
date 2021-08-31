@@ -32,6 +32,10 @@
 
     @endif 
 
+    <div class="mb-4">
+        <button wire:click="olderPosts">Load Older Posts</button>
+    </div>
+
 </div>
 
 

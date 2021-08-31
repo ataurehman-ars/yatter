@@ -2,7 +2,7 @@
 <div>
 
     <style>
-        .likes::before , .comments::before {
+        .likes::before , .comments::before, .shares::before {
             display: inline-block;
             font-style: normal;
             font-variant: normal;
@@ -22,6 +22,13 @@
             font-weight: 900; 
             content: "\f086";
             color : lightgreen;
+        }
+
+        .shares::before {
+            font-family: "Font Awesome 5 Free"; 
+            font-weight: 900; 
+            content: "\f064";
+            color : #33D1FF;
         }
 
     </style>
@@ -72,8 +79,11 @@
                         <div class="likes mr-4">
                             <strong>{{ $counts['post-' . $post->post_id]->likes . __(' Likes') }}</strong>
                         </div>
-                        <div class="comments">
+                        <div class="comments mr-4">
                             <strong>{{ $counts['post-' . $post->post_id]->comments . __(' Comments') }}</strong>
+                        </div>
+                        <div class="shares">
+                            <strong>{{ $counts['post-' . $post->post_id]->shares . __(' Shares') }}</strong>
                         </div>
                     </div>
             

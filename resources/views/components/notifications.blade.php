@@ -134,6 +134,11 @@
                     a.href = "view-post?post_id=" + notif.post_id 
                 }
 
+                if (notif.type === "share"){
+                    a.textContent = notif.username + " shared your post"
+                    a.href = "view-post?post_id=" + notif.post_id 
+                }
+
                 small.textContent = `{{ Carbon\Carbon::now()->format("F j, Y, g:i a") }}`
 
                 a.classList = "block"
