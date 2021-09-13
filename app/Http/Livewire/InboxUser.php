@@ -15,19 +15,22 @@ class InboxUser extends Component
     public $auth_id;
     public $collector;
     public $recents;
+    public $connections;
 
     public function mount()
     {
         $this->auth_id = Auth::id();
         $this->collector = [];
         $this->recents = [];
-        $this->listRecents();
+        $this->recent_messages();
+        //$this->listRecents();
     }
 
     public function getListeners()
     {
         return [
-            "echo-private:firstmessageto.{$this->auth_id},FirstMessage" => "listRecents" ,  
+            "refresh-inbox" => "listRecents" , 
+            "decrypt-msg" => "decryptMsg" , 
         ];
     }
 
@@ -74,7 +77,66 @@ class InboxUser extends Component
     }
 
 
-    
+    public function test()
+    {
+        $table_name = 'messages_' . $this->auth_id;
+
+        $distints = DB::table($table_name)
+        ->select(DB::raw("DISTINCT sent_from, sent_to"))
+        ->limit(10)
+        ->get();
+
+        $filter = [];
+
+        foreach($distints as $distinct){
+            if ($distinct->sent_from === $this->auth_id && 
+            !in_array($distinct->sent_to, $filter)){
+                array_push($filter, $distinct->sent_to);
+            }
+            else if($distinct->sent_from !== $this->auth_id){
+                array_push($filter, $distinct->sent_from);
+            }
+        }
+        
+        print_r($filter);
+        echo "<br><br>";
+
+        $collect_all = [];
+
+        foreach($filter as $id){
+
+            $message = DB::table($table_name)
+            ->where('sent_from' , $id)
+            ->orWhere(function($query) use ($id){
+                $query->where('sent_to' , $id);
+            })
+            ->leftjoin('users' , function($join) use ($id){
+                $join->where('users.id' , '=' , $id)
+                ->orWhere('users.id' , '=' , $id);
+            })
+            ->select($table_name . '.message' , $table_name . '.created_at', 
+            'users.username' , 'users.profile_photo_path')
+            ->orderBy($table_name . '.created_at' , 'desc')
+            ->limit(1)
+            ->get();
+
+            $collect_all[$id] = $message[0];
+            
+
+        }
+
+        
+
+    }
+
+
+    public function recent_messages()
+    {
+        $sp = DB::select("call recent_messages(?)" , [ $this->auth_id ]);
+
+        var_dump($sp);
+
+    }
 }
 
 

@@ -84,7 +84,7 @@ class LikePost extends Component
     {
         try {
 
-            $liked_posts = (array)json_decode(json_encode(Cache::get('all-likes-' . $this->auth_id)));
+            $liked_posts = (array)json_decode(json_encode(Cache::get('likes-' . $this->auth_id)));
 
             // if (!count($liked_posts)){
             //     return;
@@ -95,7 +95,7 @@ class LikePost extends Component
             ];
 
             array_push($liked_posts, (object)$obj);
-            Cache::put('all-likes-' . $this->auth_id , $liked_posts, 60);
+            Cache::put('likes-' . $this->auth_id , $liked_posts, 60);
         }
 
         catch (Exception $e){
@@ -105,13 +105,13 @@ class LikePost extends Component
 
     public function removeCache()
     {
-        $liked_posts = (array)json_decode(json_encode(Cache::get('all-likes-' . $this->auth_id)));
+        $liked_posts = (array)json_decode(json_encode(Cache::get('likes-' . $this->auth_id)));
 
         $removed_ids = array_filter($liked_posts, function($a) {
             return $a->post_id !== $this->post_id;
         });
 
-        Cache::put('all-likes-' . $this->auth_id , $removed_ids, 60);
+        Cache::put('likes-' . $this->auth_id , $removed_ids, 60);
 
     }
 }

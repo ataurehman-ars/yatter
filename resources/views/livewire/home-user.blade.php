@@ -3,25 +3,34 @@
 
     @php 
 
-        $obj = json_encode(Cache::get("all-likes-" . Auth::id()));
-        $cache_exists = Cache::has('all-likes-' . Auth::id());
+        $likes = Cache::get("likes-" . $auth_id );
+        $conns = Cache::get("connections-" . $auth_id );
 
     @endphp 
 
     <script>
 
-        var likes = "{{ $cache_exists }}" , 
-        echo_obj = '<?php echo $obj; ?>'
+        var likes = []  , conns = []
 
-        console.log(echo_obj)
-
-        if (likes && !localStorage.getItem("liked-posts")){
-            let arr = JSON.parse(echo_obj).map(obj => `${obj.post_id}`)
-            localStorage.setItem("liked-posts" , JSON.stringify(arr))
-            console.log(arr)
+        if (!localStorage.getItem("liked-posts")){
+            likes = {!! $likes !!}
+            likes = likes.length ? likes : []
+            localStorage.setItem("liked-posts" , JSON.stringify(likes))
         }
 
+        if (!localStorage.getItem("conns")){
+            conns = {!! $conns !!}
+            conns = conns.length ? conns : []
+            localStorage.setItem("conns" , JSON.stringify(conns))
+        }
+
+    
+        console.log(likes)
+        console.log(conns)
+
+
     </script>
+    
 </div>
 
 

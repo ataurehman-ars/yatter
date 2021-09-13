@@ -13,5 +13,7 @@
 
 @livewire('home-user')
 
+<x-message-listener />
+
 
 

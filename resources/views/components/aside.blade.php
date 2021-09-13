@@ -1,5 +1,5 @@
 
-<div class="flex items-center h-screen fixed inset-y-0 right-0">
+<div class="flex items-center h-screen fixed inset-y-0 right-0 hidden">
     <style>
         .only-weather {
             display : none;

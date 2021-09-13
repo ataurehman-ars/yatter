@@ -1,4 +1,26 @@
 <nav x-data="{ open: false }" class="bg-white">
+
+    <style>
+
+        .inbox-after , .request-after {
+            display : none;
+        }
+        
+        .inbox-after::after , .request-after::after {
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Font Awesome 5 Free"; 
+            font-weight: 900; 
+            content: "\f111";
+            color : cornflowerblue;
+            font-size : 5px;
+            margin-left : 2px;
+        }
+
+    </style>
+
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-fixed">
         <div class="flex justify-between h-16">
@@ -29,8 +51,9 @@
 
                     <!-- Inbox -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav inbox">
-                        <x-jet-nav-link href="{{ route('inbox') }}" :active="request()->routeIs('inbox')">
+                        <x-jet-nav-link onclick="removeInboxNotif()" href="{{ route('inbox') }}"  :active="request()->routeIs('inbox')">
                             {{ __('Inbox') }}
+                            <span class="inbox-after"></span>
                         </x-jet-nav-link>
                     </div>
 
@@ -38,6 +61,7 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav requests">
                         <x-jet-nav-link href="{{ route('requests') }}" :active="request()->routeIs('requests')">
                             {{ __('Requests') }}
+                            <span class="request-after"></span>
                         </x-jet-nav-link>
                     </div>
 
@@ -153,9 +177,8 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                <x-jet-dropdown-link
+                                    onclick="logout();">
                                     {{ __('Log Out') }}
                                 </x-jet-dropdown-link>
                             </form>
@@ -198,14 +221,16 @@
         </div>
 
         <div class="pt-2 pb-3 space-y-1 nav inbox">
-            <x-jet-responsive-nav-link href="{{ route('inbox') }}" :active="request()->routeIs('inbox')">
+            <x-jet-responsive-nav-link onclick="removeInboxNotif()" href="{{ route('inbox') }}" :active="request()->routeIs('inbox')">
                 {{ __('Inbox') }}
+                <span class="inbox-after"></span>
             </x-jet-responsive-nav-link>
         </div>
 
-        <div class="pt-2 pb-3 space-y-1 nav requests">
+        <div class="pt-2 pb-3 space-y-1  nav requests">
             <x-jet-responsive-nav-link href="{{ route('requests') }}" :active="request()->routeIs('requests')">
                 {{ __('Requests') }}
+                <span class="request-after"></span>
             </x-jet-responsive-nav-link>
         </div>
 
@@ -243,12 +268,11 @@
                 @endif
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" id="logout-form" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                    this.closest('form').submit();">
+                    <x-jet-responsive-nav-link 
+                        onclick="logout();">
                         {{ __('Log Out') }}
                     </x-jet-responsive-nav-link>
                 </form>
@@ -285,5 +309,23 @@
                 @endif
             </div>
         </div>
+
+        <script type="text/javascript">
+
+            async function logout(){
+
+                event.preventDefault()
+                await localStorage.clear()
+                document.getElementById("logout-form").submit()
+            }  
+
+            function removeInboxNotif(){
+                Array.from(document.getElementsByClassName('inbox-after'))
+                .forEach(inbox => inbox.style.display = "none")
+            }
+
+        </script>
     </div>
 </nav>
+
+

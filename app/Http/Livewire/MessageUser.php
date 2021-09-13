@@ -20,14 +20,12 @@ class MessageUser extends Component
     public $auth_id;
     public $receiver_id;
     public $count_msgs;
-    public $first_msg;
 
     public function mount($auth_id, $receiver_id)
     {
         $this->message = '';
         $this->auth_id = $auth_id;
         $this->receiver_id = $receiver_id;
-        $this->first_msg = true;
     }
 
 
@@ -90,14 +88,7 @@ class MessageUser extends Component
                 $this->emit('updateInterface', $this->message);
                 $this->reset('message');
 
-                if (!$this->first_msg){
-                    broadcast(new NewMessage($this->receiver_id, $this->auth_id , $s));
-                    return;
-                }
-
-                broadcast(new FirstMessage($this->receiver_id));
                 broadcast(new NewMessage($this->receiver_id, $this->auth_id , $s));
-                $this->first_msg = false;
                 return;
             }
             

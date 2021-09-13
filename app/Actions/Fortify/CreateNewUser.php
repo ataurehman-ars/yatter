@@ -39,34 +39,16 @@ class CreateNewUser implements CreatesNewUsers
         if ($create){
 
             $get_id = DB::table('users')->where('username' , $input['username'])->select('id')->get();
-            $this->createMessageTable($get_id);
-            return $create;
+            return $this->createConnectionsTable($get_id);
         }
 
     }
 
 
-    public function createMessageTable($id)
+    public function createConnectionsTable($id)
     {
 
-        Schema::connection('mysql')->create('messages_' . $id[0]->id , function(Blueprint $table)
-        {
-            $table->id();
-            $table->integer('sent_from')->nullable(false);
-            $table->integer('sent_to')->nullable(false);
-            $table->text('message')->nullable(false);
-            $table->string('created_at')->nullable(false);
-        });
-
-        Schema::connection('mysql')->create('connections_' . $id[0]->id , function(Blueprint $table)
-        {
-            $table->integer('connection_id')->primary();
-            $table->string('connection_name')->nullable(false);
-            $table->string('connection_username')->nullable(false);
-            $table->text('connection_photo_url')->nullable();
-        });
-
-        return;
+        
     }
 }
 

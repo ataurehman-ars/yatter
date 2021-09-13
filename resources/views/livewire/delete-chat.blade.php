@@ -10,7 +10,7 @@
 
     <script type="module">
         window.livewire.on("chat-deleted-{{ $receiver_id }}" , () => {
-            document.getElementById("chat-id-{{ $receiver_id }}").style.display = "none"
+            document.getElementById("inbox-{{ $receiver_id }}").style.display = "none"
         })
     </script>
 </div>

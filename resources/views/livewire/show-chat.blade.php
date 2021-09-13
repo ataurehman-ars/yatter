@@ -1,6 +1,18 @@
 
 
 <div class="container mx-auto my-4 h-64 overflow-y-scroll grid justify-items-stretch" id="chat-interface-{{ $other_id }}">
+
+    <style>
+       .typing-before::before {
+            content : "typing...";
+            font-size : 15px;
+            color : orange;
+            font-weight : bold;
+            display : inline-block;
+            margin-left : 3px;
+        }
+    </style>
+
     @foreach (array_reverse(json_decode(json_encode($messages))) as $message)
 
             @php
@@ -10,21 +22,19 @@
         @if ($message->sent_from == Auth::id())
             <div class="m-2 justify-self-end border-r-4 border-purple-600  px-3 py-1 sender-{{ Auth::id() }}">
                 <p class="text-xl"> {{ $encrypted_msg }}</p>
-                <p class="text-blue-300"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
+                <p class="text-blue-500"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
             </div>
         @else
             <div class="m-2 justify-self-start border-l-4 border-green-300 px-3 py-1 sender-{{ $other_id }}">
                 <p class="text-xl">{{ $encrypted_msg }}</p>
-                <p class="text-blue-300"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
+                <p class="text-blue-500"><small> {{ Carbon\Carbon::parse($message->created_at)->format("F j, Y, g:i a") }}</small></p>
             </div>
         @endif        
 
     @endforeach
 
-    <div class="justify-self-start rounded bg-white text-white text-green-500 px-3 py-1" id="typing">
-        <img
-        class="h-10 w-10 rounded-full object-cover"
-        src = "{{ asset('typing/typing-one.gif') }}" />
+    <div class="justify-self-start bg-transparent pl-2" id="typing">
+        <span class="typing-before"></span>
     </div>
 
 </div>

@@ -31,16 +31,16 @@
 
         wrap_msg.appendChild(p)
 
-        wrap_msg.classList = "m-2 text-white text-xl justify-self-start border-l-4 border-green-300 px-3 py-1 sender-{{ $receiver_id }}"
+        wrap_msg.classList = "m-2 text-xl justify-self-start border-l-4 border-green-300 px-3 py-1 sender-{{ $receiver_id }}"
 
         if (from_self){
 
-            wrap_msg.classList = "m-2 text-white text-xl justify-self-end border-r-4 border-purple-600 px-3 py-1"
+            wrap_msg.classList = "m-2 text-xl justify-self-end border-r-4 border-purple-600 px-3 py-1"
 
             let small = document.createElement("small")
-            //small.className = "seen-notifier"
+            
             small.textContent = "{{ Cache::has('user-active-' . $receiver_id) ? 'Delivered' : 'Sent' }}"
-            small.classList = "seen-notifier text-blue-300"
+            small.classList = "seen-notifier text-blue-500"
             small.style.fontSize = "10px"
             wrap_msg.appendChild(small)
             chat_interface.insertBefore(wrap_msg, document.getElementById('typing'))
